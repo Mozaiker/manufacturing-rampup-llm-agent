@@ -29,7 +29,28 @@ However, explaining why a specific ramp-up week is feasible or not requires:
   - Organizational decision bias (schedule commitment vs quality risk)
 LLMs are used here as a reasoning and explanation layer, not a prediction model.
 
-## 3. Core Decision Concept
+## 3. System Boundary & Roles
+
+This agent is designed as a decision-support layer, not a prediction or
+infrastructure component.
+
+**Agent Responsibilities**
+- Define explicit decision criteria for manufacturing ramp-up feasibility
+- Structure assumptions, fixed constraints, and readiness conditions
+- Reason through what-if scenarios and explain feasibility outcomes
+- Provide consistent and traceable explanations for decision shifts
+
+**Primarily Handled by Other Layers**
+- Model training, fine-tuning, or alignment at the model level
+- GPU optimization, KV cache management, or serving infrastructure
+- Large-scale traffic handling and deployment orchestration
+
+**Collaboration with Other Layers**
+- Relies on upstream systems for structured input data
+- Integrates with model serving layers for inference
+- Aligns with business and manufacturing stakeholders on decision policy
+
+## 4. Core Decision Concept
 
 The agent evaluates ramp-up feasibility based on constraint satisfaction, not
 numerical optimization.
@@ -40,7 +61,7 @@ Key constraints:
   - Qualification duration (fixed, non-compressible unless risk is accepted)
 The earliest ramp-up week is the first week where all mandatory constraints are met.
 
-## 4. Assumption-based Decision Modeling
+## 5. Assumption-based Decision Modeling
 
 In real manufacturing environments, not all inputs are formally documented.
 This agent treats assumptions and verbal agreements as first-class evidence.
@@ -54,7 +75,7 @@ This agent treats assumptions and verbal agreements as first-class evidence.
     - Setup owner: NPI Equipment Setup PM (role-based)
 All conclusions are explicitly labeled as assumption-based unless formally confirmed.
 
-## 5. Decision Logic (Human → Agent)
+## 6. Decision Logic (Human → Agent)
 Baseline decision
   - If all constraints are satisfied by W26 → Ramp-up feasible at W26
 
@@ -83,7 +104,7 @@ THEN
   - shift ramp-up week
   - reduce operational risk
 
-## 6. Agent Output Structure (Explainability-first)
+## 7. Agent Output Structure (Explainability-first)
 
 Each response follows a fixed structure:
 Example Output
@@ -107,7 +128,7 @@ Risk Assessment
 Next Required Confirmation
   - Final setup execution plan confirmation by W16
 
-## 7. What This Agent Is (and Is Not)
+## 8. What This Agent Is (and Is Not)
 
 This agent is:
   - A decision explanation system
@@ -119,7 +140,7 @@ This agent is not:
   - A scheduling optimizer
   - A replacement for engineering judgment
 
-## 8. Why This Matters
+## 9. Why This Matters
 
 This approach:
   - Makes implicit judgment explicit
@@ -130,7 +151,7 @@ This approach:
 It reflects how decisions are actually made, not how they are idealized in
 models or documentation.
 
-## 9. Next Steps (Optional Extensions)
+## 10. Next Steps (Optional Extensions)
 
   - API-based implementation (FastAPI)
   - Integration with MES / ECIM data
